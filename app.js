@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- API Configuration & Documentation ---
-    const API_KEY = 'a618527d7bcc6cd715dd5ee59e4c0e5e'; // IMPORTANT: Paste your TMDB API key here
+    function getApiKey() {
+        // Try to get API key from environment variable
+        const envApiKey = process.env.TMDB_API_KEY;
+        if (!envApiKey) {
+            console.error('TMDB API key not found. Please set it in your .env file');
+            return '';
+        }
+        return envApiKey;
+    }
+    
+    const API_KEY = getApiKey();
     const BASE_URL = 'https://api.themoviedb.org/3';
     const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
     
