@@ -1,4 +1,4 @@
-/* General Styles */
+
 :root {
     --primary-color: #3498db;
     --dark-bg: #141414;
@@ -30,7 +30,7 @@ header a {
     margin-left: 1rem;
 }
 
-/* Search Bar */
+
 #search-form {
     text-align: center;
     padding: 2rem;
@@ -61,7 +61,7 @@ header a {
     border-color: var(--primary-color);
 }
 
-/* Section Headings */
+
 #movies-heading {
     text-align: center;
     font-size: 2.5rem;
@@ -87,7 +87,7 @@ header a {
     border-radius: 2px;
 }
 
-/* Movie Grid */
+
 #movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -120,7 +120,7 @@ header a {
     min-height: 40px;
 }
 
-/* Spinner (Loading State) */
+
 .spinner {
     border: 5px solid rgba(255, 255, 255, 0.2);
     border-top-color: var(--primary-color);
@@ -135,7 +135,7 @@ header a {
     to { transform: rotate(360deg); }
 }
 
-/* Movie Details View */
+
 #movie-details-section {
     padding: 2rem;
     max-width: 1200px;
@@ -189,7 +189,7 @@ header a {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
     .movie-info-container {
         flex-direction: column;
@@ -216,7 +216,6 @@ header a {
     }
 }
 
-/* Buttons */
 #load-more-btn, .action-btn {
     display: block;
     margin: 2rem auto;
