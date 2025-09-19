@@ -10,9 +10,9 @@ git clone https://github.com/NISHANTH-7929/ACM-PROJECT-MovieFlix.git
 cd ACM-PROJECT-MovieFlix
 ```
 
-2. Set up your environment variables:
-   - Copy `.env.example` to `.env`
-   - Replace `your_tmdb_api_key_here` with your actual TMDB API key in the `.env` file
+2. Set up your configuration:
+   - Copy `config.example.js` to `config.js`
+   - Replace `your_tmdb_api_key_here` with your actual TMDB API key in the `config.js` file
 
 3. Open `index.html` in your browser
 

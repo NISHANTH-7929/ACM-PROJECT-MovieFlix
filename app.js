@@ -1,16 +1,8 @@
+import config from './config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- API Configuration & Documentation ---
-    function getApiKey() {
-        // Try to get API key from environment variable
-        const envApiKey = process.env.TMDB_API_KEY;
-        if (!envApiKey) {
-            console.error('TMDB API key not found. Please set it in your .env file');
-            return '';
-        }
-        return envApiKey;
-    }
-    
-    const API_KEY = getApiKey();
+    const API_KEY = config.tmdbApiKey;
     const BASE_URL = 'https://api.themoviedb.org/3';
     const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
     
