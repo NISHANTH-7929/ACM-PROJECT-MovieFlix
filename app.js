@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function fetchMovies(url) {
+        console.log('Fetching movies from URL:', url);
         spinner.classList.remove('hidden');
         loadMoreBtn.classList.add('hidden');
         try {
@@ -46,7 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            return data.results;
+            console.log('Received movie data:', data);
+            if (!data.results || data.results.length === 0) {
+                console.log('No movies found in response');
+            }
+            return data.results || [];
         } catch (error) {
             console.error("Failed to fetch movies:", error);
             movieGrid.innerHTML = `<p class="error">Failed to load movies. Please try again later.</p>`;
@@ -57,11 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function displayMovies(movies) {
+        console.log('Displaying movies:', movies);
         if (currentPage === 1) {
             movieGrid.innerHTML = ''; 
         }
         
+        if (!movies || movies.length === 0) {
+            movieGrid.innerHTML = '<p style="text-align: center; width: 100%; padding: 2rem;">No movies available. Please try again later.</p>';
+            return;
+        }
+        
         movies.forEach(movie => {
+            console.log('Processing movie:', movie.title);
             const card = document.importNode(movieCardTemplate.content, true);
             const movieCard = card.querySelector('.movie-card');
             movieCard.dataset.movieId = movie.id; 
@@ -135,11 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     async function loadInitialMovies() {
+        console.log('Loading initial movies...');
         currentPage = 1;
         currentSearchTerm = '';
         moviesHeading.textContent = 'Popular Movies';
         const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
+        console.log('API Key being used:', API_KEY);
         const movies = await fetchMovies(url);
+        console.log('Movies to display:', movies?.length || 0);
         displayMovies(movies);
     }
     
