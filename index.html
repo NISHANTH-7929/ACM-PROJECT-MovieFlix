@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieFlix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>MovieFlix</h1>
+        <nav>
+            <a href="#" id="home-link">Home</a>
+            <a href="#" id="favorites-link">Favorites</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search-section">
+            <form id="search-form">
+                <input type="text" id="search-input" placeholder="Search for a movie..." autocomplete="off">
+            </form>
+        </section>
+
+        <section id="movies-section">
+            <h2 id="movies-heading">Popular Movies</h2>
+            <div id="movie-grid"></div>
+            <div id="spinner" class="spinner hidden"></div>
+            <button id="load-more-btn" class="hidden">Load More</button>
+        </section>
+
+        <section id="movie-details-section" class="hidden"></section>
+    </main>
+
+    <template id="movie-card-template">
+        <div class="movie-card">
+            <img src="" alt="Movie Poster">
+            <h3>Movie Title</h3>
+        </div>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
