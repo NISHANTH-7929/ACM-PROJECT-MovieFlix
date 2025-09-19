@@ -1,14 +1,13 @@
 import config from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- API Configuration & Documentation ---
     const API_KEY = config.tmdbApiKey;
     const BASE_URL = 'https://api.themoviedb.org/3';
     const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
     let currentPage = 1;
     let currentSearchTerm = '';
-    let currentView = 'home'; // 'home', 'details', 'favorites'
+    let currentView = 'home'; 
 
     const movieGrid = document.getElementById('movie-grid');
     const spinner = document.getElementById('spinner');
@@ -245,10 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadMoreBtn.classList.add('hidden');
     }
    
-    // Add navigation event listeners
     document.getElementById('home-link').addEventListener('click', showHomeScreen);
     document.getElementById('favorites-link').addEventListener('click', showFavorites);
 
-    // Initialize the application
     loadInitialMovies();
 });
