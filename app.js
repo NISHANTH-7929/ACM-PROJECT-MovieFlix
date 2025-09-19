@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- API Configuration & Documentation ---
+    
     function getApiKey() {
-        // Try to get API key from environment variable
         const envApiKey = process.env.TMDB_API_KEY;
         if (!envApiKey) {
             console.error('TMDB API key not found. Please set it in your .env file');
@@ -13,18 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const API_KEY = getApiKey();
     const BASE_URL = 'https://api.themoviedb.org/3';
     const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
-    
-    // API Endpoints Used:
-    // - GET /movie/popular (for the homepage)
-    // - GET /search/movie (for search functionality)
-    // - GET /movie/{id} (for movie details)
 
-    // --- State Management ---
     let currentPage = 1;
     let currentSearchTerm = '';
     let currentView = 'home'; // 'home', 'details', 'favorites'
 
-    // --- DOM Element References ---
     const movieGrid = document.getElementById('movie-grid');
     const spinner = document.getElementById('spinner');
     const loadMoreBtn = document.getElementById('load-more-btn');
@@ -35,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const movieCardTemplate = document.getElementById('movie-card-template');
     const moviesHeading = document.getElementById('movies-heading');
     
-    // --- API Fetch Functions (with Error Handling) ---
     async function fetchMovieTrailer(movieId) {
         try {
             const response = await fetch(`${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}`);
@@ -43,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            // Filter for YouTube trailers, preferring official trailers
             const trailers = data.results.filter(video => 
                 video.site === 'YouTube' && 
                 (video.type === 'Trailer' || video.type === 'Teaser')
@@ -74,16 +64,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // --- DOM Manipulation Functions ---
     function displayMovies(movies) {
         if (currentPage === 1) {
-            movieGrid.innerHTML = ''; // Clear grid for new search/page load
+            movieGrid.innerHTML = ''; 
         }
         
         movies.forEach(movie => {
             const card = document.importNode(movieCardTemplate.content, true);
             const movieCard = card.querySelector('.movie-card');
-            movieCard.dataset.movieId = movie.id; // Store ID for click events
+            movieCard.dataset.movieId = movie.id; 
             
             const poster = card.querySelector('img');
             poster.src = movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : 'https://via.placeholder.com/500x750?text=No+Image';
@@ -102,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentView = 'details';
         moviesSection.classList.add('hidden');
         movieDetailsSection.classList.remove('hidden');
-        movieDetailsSection.innerHTML = ''; // Clear previous details
+        movieDetailsSection.innerHTML = ''; 
         spinner.classList.remove('hidden');
         
         try {
@@ -142,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 ${trailerHTML}
             `;
-            // Add event listener to the new back button
+
             document.getElementById('back-btn').addEventListener('click', showHomeScreen);
             document.getElementById('favorite-btn').addEventListener('click', () => toggleFavorite(movie));
         } catch (error) {
@@ -153,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // --- Application Flow Functions ---
     async function loadInitialMovies() {
         currentPage = 1;
         currentSearchTerm = '';
@@ -170,18 +158,17 @@ document.addEventListener('DOMContentLoaded', () => {
             : `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${currentPage}`;
         
         const movies = await fetchMovies(url);
-        displayMovies(movies); // Appends movies instead of replacing
+        displayMovies(movies);
     }
     
     function showHomeScreen() {
         currentView = 'home';
         movieDetailsSection.classList.add('hidden');
         moviesSection.classList.remove('hidden');
-        searchInput.value = ''; // Clear search input when returning home
+        searchInput.value = ''; 
         loadInitialMovies();
     }
     
-    // --- Event Listeners ---
     searchForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const searchTerm = searchInput.value.trim();
@@ -200,13 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Add real-time search after user stops typing
     let searchTimeout;
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(async () => {
             const searchTerm = e.target.value.trim();
-            if (searchTerm.length >= 3) { // Only search if at least 3 characters
+            if (searchTerm.length >= 3) { 
                 currentPage = 1;
                 currentSearchTerm = searchTerm;
                 moviesHeading.textContent = `Results for "${searchTerm}"`;
@@ -219,10 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     displayMovies(movies);
                 }
             } else if (searchTerm.length === 0) {
-                // If search is cleared, show popular movies
                 showHomeScreen();
             }
-        }, 500); // Wait 500ms after user stops typing before searching
+        }, 500); 
     });
 
     loadMoreBtn.addEventListener('click', loadMoreMovies);
@@ -235,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Bonus: Favorites System ---
     function getFavorites() {
         return JSON.parse(localStorage.getItem('favoriteMovies')) || [];
     }
@@ -263,15 +247,14 @@ document.addEventListener('DOMContentLoaded', () => {
         moviesSection.classList.remove('hidden');
         moviesHeading.textContent = 'My Favorites';
         const favorites = getFavorites();
-        currentPage = 1; // Reset for display purposes
+        currentPage = 1; 
         displayMovies(favorites);
-        loadMoreBtn.classList.add('hidden'); // No pagination for favorites
-    }
+        loadMoreBtn.classList.add('hidden');
     
-    // Navigation Links
+   
     document.getElementById('home-link').addEventListener('click', showHomeScreen);
     document.getElementById('favorites-link').addEventListener('click', showFavorites);
 
-    // --- Initial Load ---
+
     loadInitialMovies();
 });
