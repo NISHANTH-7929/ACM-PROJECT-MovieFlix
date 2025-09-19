@@ -2,8 +2,6 @@
 
 A movie discovery web application that allows users to browse popular movies, search for specific titles, and view detailed information including trailers.
 
-🌐 **Live Demo:** [https://nishanth-7929.github.io/ACM-PROJECT-MovieFlix/](https://nishanth-7929.github.io/ACM-PROJECT-MovieFlix/)
-
 ## Setup
 
 1. Clone the repository:
@@ -26,10 +24,6 @@ cd ACM-PROJECT-MovieFlix
 - Add movies to favorites
 - Responsive design
 
-## Deployment
-
-The application is live and can be accessed at: [https://nishanth-7929.github.io/ACM-PROJECT-MovieFlix/](https://nishanth-7929.github.io/ACM-PROJECT-MovieFlix/)
-
 ## API
 
 This project uses the TMDB (The Movie Database) API. You'll need to:
@@ -50,3 +44,19 @@ export default config;
 ```
 
 Replace `your_tmdb_api_key_here` with your actual TMDB API key.
+
+## Screenshots
+
+Here are some screenshots of the application in action:
+
+### Home Page
+![Home Page with Popular Movies](./screenshots/home.png)
+
+### Movie Details
+![Movie Details and Trailer](./screenshots/movie-details.png)
+
+### Favorites
+![Favorites Section](./screenshots/favorites.png)
+
+### Search Results
+![Search Functionality](./screenshots/search.png)
