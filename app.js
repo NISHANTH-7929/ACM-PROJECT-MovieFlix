@@ -243,11 +243,12 @@ document.addEventListener('DOMContentLoaded', () => {
         currentPage = 1; 
         displayMovies(favorites);
         loadMoreBtn.classList.add('hidden');
-    
+    }
    
+    // Add navigation event listeners
     document.getElementById('home-link').addEventListener('click', showHomeScreen);
     document.getElementById('favorites-link').addEventListener('click', showFavorites);
 
-
+    // Initialize the application
     loadInitialMovies();
 });
